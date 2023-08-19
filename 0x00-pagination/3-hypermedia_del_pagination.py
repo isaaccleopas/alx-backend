@@ -1,10 +1,11 @@
-t hypermedia pagination
+#!/usr/bin/env python3
+"""
+Deletion-resilient hypermedia pagination
 """
 
 import csv
 import mat#!/usr/bin/env python3
-"""
-Deletion-resilienh
+
 from typing import List
 
 
@@ -45,24 +46,19 @@ class Server:
         """Retrieves info about a page from a given index and with a
         specified size.
         """
-        data = self.indexed_dataset()
-        assert index is not None and index >= 0 and index <= max(data.keys())
-        page_data = []
-        data_count = 0
-        next_index = None
-        start = index if index else 0
-        for i, item in data.items():
-            if i >= start and data_counem)
-                data_count += 1
-              t < page_size:
-                page_data.append(it  continue
-            if data_count == page_size:
-                next_index = i
-                break
-        page_info = {
+        assert index is None or 0 <= index < len(self.indexed_dataset())
+        assert isinstance(page_size, int) and page_size >= 0
+
+        indexed_data = self.indexed_dataset()
+        if index is None:
+            index = 0
+
+        next_index = index + page_size
+        data = [indexed_data[i] for i in range(index, min(next_index, len(indexed_data)))]
+
+        return {
             'index': index,
             'next_index': next_index,
-            'page_size': len(page_data),
-            'data': page_data,
+            'page_size': page_size,
+            'data': data
         }
-        return page_info
