@@ -50,7 +50,8 @@ class Server:
             index = 0
 
         next_index = index + page_size
-        data = [indexed_data[i] for i in range(index, min(next_index, len(indexed_data)))]
+        data = [indexed_data[i] for i in range(index,\
+        min(next_index, len(indexed_data)))]
 
         return {
             'index': index,
