@@ -27,9 +27,10 @@ class LRUCache(BaseCaching):
         """ Add an item in the cache using LRU strategy
         """
         if key is not None and item is not None:
-            if len(self.cache_data) >= self.MAX_ITEMS:
-                self.remove_lru_item()
-                print("DISCARD:", key)
+            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+                lru_key = self.lru_order.pop()
+                self.cache_data.pop(lru_key)
+                print("DISCARD:", lru_key)
 
             self.cache_data[key] = item
             self.update_lru_order(key)
