@@ -34,3 +34,13 @@ class MRUCache(BaseCaching):
 
             self.cache_data[key] = item
             self.update_mru_order(key)
+
+    def get(self, key):
+        """ Get an item from the cache by key
+        """
+        if key is not None and key in self.cache_data:
+            # Update MRU order
+            self.update_mru_order(key)
+            return self.cache_data[key]
+        else:
+            return None
