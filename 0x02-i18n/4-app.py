@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-""" Force locale with URL parameter"""
+""" Force locale with URL parameter
+"""
 from flask import Flask
 from flask_babel import Babel
 from flask import render_template, request
 
 
 class Config:
-    """Represents a Flask Babel configuration."""
+    """Represents a Flask Babel configuration.
+    """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
@@ -35,7 +37,8 @@ def get_locale() -> str:
 
 @app.route('/')
 def get_index() -> str:
-    """The index page."""
+    """The home/index page.
+    """
     return render_template('4-index.html')
 
 
