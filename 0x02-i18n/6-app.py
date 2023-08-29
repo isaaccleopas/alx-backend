@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Use user locale
-"""
+"""Use user locale"""
 from flask import Flask
 from flask_babel import Babel
 from flask import render_template, request, g
@@ -60,11 +59,10 @@ def get_locale() -> str:
 
 
 @app.route('/')
-def ge"""
+def get_index():
+    """The index page"""
     return render_template('6-index.html')
 
 
-it_index() -> str:
-    """The home/index page.
-    f __name__ == '__main__':
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
