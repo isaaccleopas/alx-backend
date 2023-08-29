@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Use user locale"""
+"""Use user locale
+"""
 from flask import Flask
 from flask_babel import Babel
 from flask import render_template, request, g
@@ -7,7 +8,8 @@ from typing import Union, Dict
 
 
 class Config:
-    """Represents a Flask Babel configuration."""
+    """Represents a Flask Babel configuration.
+    """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
@@ -26,7 +28,8 @@ users = {
 
 
 def get_user() -> Union[Dict, None]:
-    """Retrieves a user based on a user id."""
+    """Retrieves a user based on a user id.
+    """
     login_id = request.args.get('login_as', '')
     if login_id:
         return users.get(int(login_id), None)
@@ -35,18 +38,20 @@ def get_user() -> Union[Dict, None]:
 
 @app.before_request
 def before_request() -> None:
-    """Performs some routines before each request's resolution."""
+    """Performs some routines before each request's resolution.
+    """
     user = get_user()
     g.user = user
 
 
 @babel.localeselector
 def get_locale() -> str:
-    """Retrieves the locale for a web page."""
+    """Retrieves the locale for a web page.
+    """
     locale = request.args.get('locale', '')
-    if locale in app.couser and g.user['locale'] in app.config["LANGUAGESnfig["LANGUAGES"]:
+    if locale in app.config["LANGUAGES"]:
         return locale
-    if g."]:
+    if g.user and g.user['locale'] in app.config["LANGUAGES"]:
         return g.user['locale']
     header_locale = request.headers.get('locale', '')
     if header_locale in app.config["LANGUAGES"]:
@@ -55,10 +60,11 @@ def get_locale() -> str:
 
 
 @app.route('/')
-def get_index() -> str:
-    """The index page."""
+def ge"""
     return render_template('6-index.html')
 
 
-if __name__ == '__main__':
+it_index() -> str:
+    """The home/index page.
+    f __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
