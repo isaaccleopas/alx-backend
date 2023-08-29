@@ -26,7 +26,8 @@ users = {
 
 
 def get_user() -> Union[Dict, None]:
-    """Retrieves a user based on a user id."""
+    """Retrieves a user based on a user id.
+    """
     login_id = request.args.get('login_as')
     if login_id:
         return users.get(int(login_id))
@@ -35,14 +36,16 @@ def get_user() -> Union[Dict, None]:
 
 @app.before_request
 def before_request() -> None:
-    """user login system is outside the scope of this"""
+    """user login system is outside the scope of this project
+    """
     user = get_user()
     g.user = user
 
 
 @babel.localeselector
 def get_locale() -> str:
-    """Retrieves the locale for a web page."""
+    """Retrieves the locale for a web page.
+    """
     locale = request.args.get('locale', '')
     if locale in app.config["LANGUAGES"]:
         return locale
