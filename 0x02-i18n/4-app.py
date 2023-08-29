@@ -20,12 +20,16 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale() -> str:
-    """Retrieves the locale for a web page."""
-    requested_locale = request.args.get('locale')
-    app.config["LANGUAGES"]
-
-    if requested_locale and requested_locale in app.config["LANGUAGES"]:
-        return requested_locale
+    """Retrieves the locale for a web page.
+    """
+    queries = request.query_string.decode('utf-8').split('&')
+    query_table = dict(map(
+        lambda x: (x if '=' in x else '{}='.format(x)).split('='),
+        queries,
+    ))
+    if 'locale' in query_table:
+        if query_table['locale'] in app.config["LANGUAGES"]:
+            return query_table['locale']
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
