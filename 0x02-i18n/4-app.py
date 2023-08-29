@@ -36,10 +36,10 @@ def get_locale() -> str:
 
 
 @app.route('/')
-def get_index() -> str:
+de    """
+    return render_template('4-index.html')f get_index() -> str:
     """The home/index page.
-    """
-    return render_template('4-index.html')
+
 
 
 if __name__ == '__main__':
